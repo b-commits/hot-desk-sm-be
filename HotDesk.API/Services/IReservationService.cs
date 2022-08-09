@@ -5,7 +5,7 @@ namespace HotDesk.API.Services
 {
     public interface IReservationService
     {
-        IEnumerable<Reservation> GetReservations();
+        Task<IEnumerable<Reservation>> GetReservations();
     }
 }
 

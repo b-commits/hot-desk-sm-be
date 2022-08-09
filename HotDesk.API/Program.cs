@@ -1,6 +1,9 @@
-﻿using HotDesk.API.Services;
+﻿using HotDesk.API.Config;
+using HotDesk.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<DatabaseConfig>(builder.Configuration.GetSection("Database"));
 
 builder.Services.AddScoped<ILocationService, LocationsService>();
 builder.Services.AddScoped<IReservationService, ReservationsService>();
