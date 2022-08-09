@@ -9,6 +9,6 @@ namespace HotDesk.API.Services
         Task<Location?> GetLocationBydIdAsync(string locationId);
         Task InsertLocationAsync(Location location);
         Task DeleteLocationAsync(string locationId);
+        Task UpdateLocationAsync(string locationId, Location newLocation);
     }
 }
-

@@ -9,7 +9,6 @@ namespace HotDesk.API.Controllers
     [Route("/desks")]
     public class DesksController : ControllerBase
     {
-
         private readonly IDeskService _deskService;
 
         public DesksController(IDeskService deskService)
@@ -23,8 +22,6 @@ namespace HotDesk.API.Controllers
             var desks = await _deskService.GetDesksAsync();
             return Ok(desks);
         }
-
-
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Desk>> GetById(string id)
@@ -58,9 +55,26 @@ namespace HotDesk.API.Controllers
 
             await _deskService.DeleteDeskAsync(id);
 
-            return NoContent();
+            return Ok();
+        }
+
+
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> UpdateDesk(string id, Desk newDesk)
+        {
+            var desk = await _deskService.GetDeskByIdAsync(id);
+
+            if (desk is null)
+            {
+                return NotFound();
+            }
+
+            newDesk.Id = desk.Id;
+
+            await _deskService.UpdateDeskAsync(id, newDesk);
+
+            return Ok();
         }
 
     }
 }
-

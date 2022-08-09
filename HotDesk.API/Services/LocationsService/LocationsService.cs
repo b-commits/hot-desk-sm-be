@@ -25,6 +25,8 @@ namespace HotDesk.API.Services
 
         public async Task<Location?> GetLocationBydIdAsync(string locationId) =>
             await _locations.Find(location => location.Id == locationId).FirstOrDefaultAsync();
+
+        public async Task UpdateLocationAsync(string locationId, Location newLocation) =>
+            await _locations.ReplaceOneAsync(location => location.Id == locationId, newLocation);
     }
 }
-

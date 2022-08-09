@@ -11,4 +11,3 @@ namespace HotDesk.API.Config
         IMongoCollection<Location> GetLocationsCollection();
     }
 }
-

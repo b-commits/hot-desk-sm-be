@@ -12,4 +12,3 @@ namespace HotDesk.API.Services
         Task UpdateReservationAsync(string reservationId, Reservation newReservation);
     }
 }
-

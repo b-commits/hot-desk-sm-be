@@ -9,7 +9,6 @@ namespace HotDesk.API.Services
         Task<Desk?> GetDeskByIdAsync(string deskId);
         Task InsertDeskAsync(Desk desk);
         Task DeleteDeskAsync(string deskId);
-
+        Task UpdateDeskAsync(string deskId, Desk newDesk);
     }
 }
-

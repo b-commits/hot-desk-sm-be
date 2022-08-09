@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace HotDesk.API.Config
 {
     public class DatabaseConfig
@@ -10,4 +11,3 @@ namespace HotDesk.API.Config
         public string DesksCollectionName { get; set; }
     }
 }
-

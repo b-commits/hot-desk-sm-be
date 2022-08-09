@@ -13,4 +13,3 @@ namespace HotDesk.API.Models
         public string City { get; set; }
     }
 }
-

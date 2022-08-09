@@ -12,7 +12,5 @@ namespace HotDesk.API.Models
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string LocationId { get; set; }
-
     }
 }
-

@@ -11,15 +11,17 @@ namespace HotDesk.API.Config
         private readonly IMongoCollection<Location> _locations;
         private readonly IMongoCollection<Desk> _desks;
 
-
         public DatabaseContext(IOptions<DatabaseConfig> databaseConfig)
         {
             var client = new MongoClient(databaseConfig.Value.ConnectionString);
             var database = client.GetDatabase(databaseConfig.Value.DatabaseName);
 
-
-            _reservations = database.GetCollection<Reservation>(databaseConfig.Value.ReservationsCollectionName);
-            _locations = database.GetCollection<Location>(databaseConfig.Value.LocationsCollectionName);
+            _reservations = database.GetCollection<Reservation>(
+                databaseConfig.Value.ReservationsCollectionName
+            );
+            _locations = database.GetCollection<Location>(
+                databaseConfig.Value.LocationsCollectionName
+            );
             _desks = database.GetCollection<Desk>(databaseConfig.Value.DesksCollectionName);
         }
 
@@ -30,4 +32,3 @@ namespace HotDesk.API.Config
         public IMongoCollection<Reservation> GetReservationsCollection() => _reservations;
     }
 }
-

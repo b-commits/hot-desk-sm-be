@@ -20,4 +20,3 @@ namespace HotDesk.API.Models
         public string DeskId { get; set; }
     }
 }
-
