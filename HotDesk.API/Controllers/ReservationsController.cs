@@ -1,5 +1,4 @@
-﻿using System;
-using HotDesk.API.Models;
+﻿using HotDesk.API.Models;
 using HotDesk.API.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HotDesk.API.Config
+﻿namespace HotDesk.API.Config
 {
     public class DatabaseConfig
     {

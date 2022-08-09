@@ -1,5 +1,4 @@
-﻿using System;
-using HotDesk.API.Config;
+﻿using HotDesk.API.Config;
 using HotDesk.API.Models;
 using MongoDB.Driver;
 
