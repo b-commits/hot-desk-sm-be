@@ -1,10 +1,16 @@
 ﻿using System;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace HotDesk.API.Models
 {
     public class Desk
     {
-        private int number { get; set; }
-        private int locationId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        private int Id { get; set; }
+
+        private int LocationId { get; set; }
       
     }
 }
