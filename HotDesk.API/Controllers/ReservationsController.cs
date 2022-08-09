@@ -1,4 +1,5 @@
 ﻿using HotDesk.API.Models;
+using HotDesk.API.Utilities;
 using HotDesk.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,14 @@ namespace HotDesk.API.Controllers
         [HttpPost]
         public async Task<IActionResult> PostReserivation(Reservation reservation)
         {
+            if (
+                (reservation.EndDate - reservation.StartDate).TotalDays
+                > ValidationUtils.MAX_RESERVATION_LENGTH
+            )
+            {
+                return BadRequest(ValidationUtils.RESERVATION_LENGTH_EXCEEDED);
+            }
+
             await _reservationService.InsertReservationAsync(reservation);
             return CreatedAtAction(
                 nameof(GetReservations),
