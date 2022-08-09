@@ -5,9 +5,11 @@ namespace HotDesk.API.Services
 {
     public interface IDeskService
     {
-        Task<IEnumerable<Desk>> GetDesks();
+        Task<IEnumerable<Desk>> GetDesksAsync();
+        Task<Desk?> GetDeskByIdAsync(string deskId);
         Task InsertDeskAsync(Desk desk);
         Task DeleteDeskAsync(string deskId);
+
     }
 }
 

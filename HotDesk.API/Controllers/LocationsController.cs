@@ -19,7 +19,7 @@ public class LocationsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<Location>> GetLocations()
     {
-        var locations = await _locationService.SelectLocationsAsync();
+        var locations = await _locationService.GetLocationsAsync();
         return Ok(locations);
     }
 

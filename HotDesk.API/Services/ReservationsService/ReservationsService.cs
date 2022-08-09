@@ -17,7 +17,10 @@ namespace HotDesk.API.Services
         public async Task DeleteReservationAsync(string reservationId) =>
             await _reservations.DeleteOneAsync(reservation => reservation.Id == reservationId);
 
-        public async Task<IEnumerable<Reservation>> GetReservations() =>
+        public async Task<Reservation?> GetReservationByIdAsync(string reservationId) =>
+            await _reservations.Find(reservation => reservation.Id == reservationId).FirstOrDefaultAsync();
+
+        public async Task<IEnumerable<Reservation>> GetReservationsAsync() =>
             await _reservations.Find(_ => true).ToListAsync();
 
         public async Task InsertReservationAsync(Reservation reservation) =>

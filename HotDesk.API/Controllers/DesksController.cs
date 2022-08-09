@@ -18,9 +18,25 @@ namespace HotDesk.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetDesks()
+        public async Task<ActionResult<Desk>> GetDesks()
         {
-            return Ok(_deskService.GetDesks());
+            var desks = await _deskService.GetDesksAsync();
+            return Ok(desks);
+        }
+
+
+
+        [HttpGet("{id:length(24)}")]
+        public async Task<ActionResult<Desk>> GetById(string id)
+        {
+            var desk = await _deskService.GetDeskByIdAsync(id);
+
+            if (desk is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(desk);
         }
 
         [HttpPost]
@@ -28,6 +44,21 @@ namespace HotDesk.API.Controllers
         {
             await _deskService.InsertDeskAsync(desk);
             return CreatedAtAction(nameof(GetDesks), new { id = desk.Id }, desk);
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> DeleteDesk(string id)
+        {
+            var desk = await _deskService.GetDeskByIdAsync(id);
+
+            if (desk is null)
+            {
+                return NotFound();
+            }
+
+            await _deskService.DeleteDeskAsync(id);
+
+            return NoContent();
         }
 
     }
