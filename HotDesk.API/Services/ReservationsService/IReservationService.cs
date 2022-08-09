@@ -7,6 +7,8 @@ namespace HotDesk.API.Services
     {
         Task<IEnumerable<Reservation>> GetReservations();
         Task InsertReservationAsync(Reservation reservation);
+        Task DeleteReservationAsync(string reservationId);
+        Task UpdateReservationAsync(string reservationId, Reservation newReservation);
     }
 }
 

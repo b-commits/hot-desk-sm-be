@@ -14,11 +14,17 @@ namespace HotDesk.API.Services
             _reservations = database.GetReservationsCollection();
         }
 
+        public async Task DeleteReservationAsync(string reservationId) =>
+            await _reservations.DeleteOneAsync(reservation => reservation.Id == reservationId);
+
         public async Task<IEnumerable<Reservation>> GetReservations() =>
-                await _reservations.Find(_ => true).ToListAsync();
+            await _reservations.Find(_ => true).ToListAsync();
 
         public async Task InsertReservationAsync(Reservation reservation) =>
-                await _reservations.InsertOneAsync(reservation);
+             await _reservations.InsertOneAsync(reservation);
+
+        public async Task UpdateReservationAsync(string reservationId, Reservation newReservation) =>
+             await _reservations.ReplaceOneAsync(reservation => reservation.Id == reservationId, newReservation);
     }
 }
 

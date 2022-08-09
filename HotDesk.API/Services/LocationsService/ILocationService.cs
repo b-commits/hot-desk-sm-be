@@ -7,6 +7,7 @@ namespace HotDesk.API.Services
     {
         Task<IEnumerable<Location>> SelectLocationsAsync();
         Task InsertLocationAsync(Location location);
+        Task DeleteLocationAsync(string locationId);
     }
 }
 

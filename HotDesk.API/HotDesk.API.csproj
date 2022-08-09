@@ -17,10 +17,16 @@
     <None Remove="Models\" />
     <None Remove="Services\" />
     <None Remove="Config\" />
+    <None Remove="Services\DesksService\" />
+    <None Remove="Services\ReservationsService\" />
+    <None Remove="Services\LocationsService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Config\" />
+    <Folder Include="Services\DesksService\" />
+    <Folder Include="Services\ReservationsService\" />
+    <Folder Include="Services\LocationsService\" />
   </ItemGroup>
 </Project>

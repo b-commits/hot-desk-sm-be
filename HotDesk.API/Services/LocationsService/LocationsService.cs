@@ -22,6 +22,8 @@ namespace HotDesk.API.Services
         public async Task InsertLocationAsync(Location location) =>
             await _locations.InsertOneAsync(location);
 
+        public async Task DeleteLocationAsync(string locationId) =>
+            await _locations.DeleteOneAsync(location => location.Id == locationId);
     }
 }
 

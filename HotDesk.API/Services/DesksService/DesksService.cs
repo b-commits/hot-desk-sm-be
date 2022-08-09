@@ -14,8 +14,11 @@ namespace HotDesk.API.Services
             _desks = database.GetDesksCollection();
         }
 
+        public async Task DeleteDeskAsync(string deskId) =>
+            await _desks.DeleteOneAsync(desk => desk.Id == deskId);
+
         public async Task<IEnumerable<Desk>> GetDesks() =>
-          await _desks.Find(_ => true).ToListAsync();
+            await _desks.Find(_ => true).ToListAsync();
 
         public async Task InsertDeskAsync(Desk desk) =>
             await _desks.InsertOneAsync(desk);
