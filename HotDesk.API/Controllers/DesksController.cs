@@ -57,7 +57,6 @@ namespace HotDesk.API.Controllers
             return Ok();
         }
 
-
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> UpdateDesk(string id, Desk newDesk)
         {
@@ -74,6 +73,5 @@ namespace HotDesk.API.Controllers
 
             return Ok();
         }
-
     }
 }

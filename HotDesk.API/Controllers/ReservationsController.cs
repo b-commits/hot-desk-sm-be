@@ -76,6 +76,5 @@ namespace HotDesk.API.Controllers
 
             return Ok();
         }
-
     }
 }
