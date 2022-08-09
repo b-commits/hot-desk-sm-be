@@ -1,5 +1,6 @@
 ﻿using HotDesk.API.Models;
 using HotDesk.API.Services;
+using HotDesk.API.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotDesk.API.Controllers
@@ -9,10 +10,12 @@ namespace HotDesk.API.Controllers
     public class DesksController : ControllerBase
     {
         private readonly IDeskService _deskService;
+        private readonly IReservationService _reservationService;
 
-        public DesksController(IDeskService deskService)
+        public DesksController(IDeskService deskService, IReservationService reservationService)
         {
             _deskService = deskService;
+            _reservationService = reservationService;
         }
 
         [HttpGet]
@@ -50,6 +53,13 @@ namespace HotDesk.API.Controllers
             if (desk is null)
             {
                 return NotFound();
+            }
+
+            var deskReservations = await _reservationService.GetReservationsAsync();
+
+            if (deskReservations.Any(reservation => reservation.DeskId == id))
+            {
+                return BadRequest(ValidationUtils.CANNOT_DELETE_DESK);
             }
 
             await _deskService.DeleteDeskAsync(id);

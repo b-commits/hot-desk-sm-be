@@ -1,5 +1,6 @@
 ﻿using HotDesk.API.Models;
 using HotDesk.API.Services;
+using HotDesk.API.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotDesk.API.Controllers;
@@ -9,10 +10,12 @@ namespace HotDesk.API.Controllers;
 public class LocationsController : ControllerBase
 {
     private readonly ILocationService _locationService;
+    private readonly IDeskService _deskService;
 
-    public LocationsController(ILocationService locationService)
+    public LocationsController(ILocationService locationService, IDeskService deskService)
     {
         _locationService = locationService;
+        _deskService = deskService;
     }
 
     [HttpGet]
@@ -50,6 +53,13 @@ public class LocationsController : ControllerBase
         if (location is null)
         {
             return NotFound();
+        }
+
+        var desksInLocation = await _deskService.GetDesksAsync();
+
+        if (desksInLocation.Any(desk => desk.LocationId == id))
+        {
+            return BadRequest(ValidationUtils.CANNOT_DELETE_LOCATION);
         }
 
         await _locationService.DeleteLocationAsync(id);
