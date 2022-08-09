@@ -1,4 +1,5 @@
 ﻿using System;
+using HotDesk.API.Config;
 using HotDesk.API.Models;
 using MongoDB.Driver;
 
@@ -6,15 +7,15 @@ namespace HotDesk.API.Services
 {
     public class ReservationsService : IReservationService
     {
-        private readonly IMongoCollection<Reservation> _reservationsService;
+        private readonly IMongoCollection<Reservation> _reservations;
 
-        public ReservationsService(IMongoCollection<Reservation> reservationsCollection)
+        public ReservationsService(IDatabaseContext database)
         {
-            _reservationsService = reservationsCollection;
+            _reservations = database.GetReservationsCollection();
         }
 
-        public async Task<IEnumerable<Desk>> GetDesks() =>
-      await _desksCollection.Find(_ => true).ToListAsync();
+        public async Task<IEnumerable<Reservation>> GetReservations() =>
+      await _reservations.Find(_ => true).ToListAsync();
     }
 }
 

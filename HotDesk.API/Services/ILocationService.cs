@@ -5,7 +5,8 @@ namespace HotDesk.API.Services
 {
     public interface ILocationService
     {
-        Task<IEnumerable<Location>> GetLocations();
+        Task<IEnumerable<Location>> SelectLocations();
+        Task InsertLocation(Location location);
     }
 }
 

@@ -19,7 +19,16 @@ public class LocationsController : ControllerBase
     [HttpGet]
     public IActionResult GetLocations()
     {
-        return Ok(_locationService.GetLocations());
+        return Ok(_locationService.SelectLocations());
     }
+
+    [HttpPost]
+    public IActionResult PostLocation(Location location)
+    {
+        _locationService.InsertLocation(location);
+        return Ok();
+    }
+
+
 }
 

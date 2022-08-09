@@ -17,6 +17,7 @@ namespace HotDesk.API.Config
             var client = new MongoClient(databaseConfig.Value.ConnectionString);
             var database = client.GetDatabase(databaseConfig.Value.DatabaseName);
 
+
             _reservations = database.GetCollection<Reservation>(databaseConfig.Value.ReservationsCollectionName);
             _locations = database.GetCollection<Location>(databaseConfig.Value.LocationsCollectionName);
             _desks = database.GetCollection<Desk>(databaseConfig.Value.DesksCollectionName);
@@ -24,7 +25,7 @@ namespace HotDesk.API.Config
 
         public IMongoCollection<Desk> GetDesksCollection() => _desks;
 
-        public IMongoCollection<Location> GetLocationCollection() => _locations;
+        public IMongoCollection<Location> GetLocationsCollection() => _locations;
 
         public IMongoCollection<Reservation> GetReservationsCollection() => _reservations;
     }
