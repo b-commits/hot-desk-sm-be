@@ -1,4 +1,10 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using HotDesk.API.Services;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<ILocationService, LocationsService>();
+builder.Services.AddScoped<IReservationService, ReservationsService>();
+builder.Services.AddScoped<IDeskService, DesksService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

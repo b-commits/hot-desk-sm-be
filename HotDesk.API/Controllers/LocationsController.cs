@@ -1,15 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HotDesk.API.Models;
+using HotDesk.API.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HotDesk.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/locations")]
 public class LocationsController : ControllerBase
 {
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+
+    private readonly ILocationService _locationService;
+
+    public LocationsController(ILocationService locationService)
     {
-        return null;
+        _locationService = locationService;
+    }
+
+    [HttpGet]
+    public IActionResult GetLocations()
+    {
+        return Ok(_locationService.GetLocations());
     }
 }
 

@@ -1,11 +1,27 @@
 ﻿using System;
+using HotDesk.API.Services;
+using Microsoft.AspNetCore.Mvc;
+
 namespace HotDesk.API.Controllers
 {
-    public class DesksController
+    [ApiController]
+    [Route("/desks")]
+    public class DesksController : ControllerBase
     {
-        public DesksController()
+
+        private readonly IDeskService _deskService;
+
+        public DesksController(IDeskService deskService)
         {
+            _deskService = deskService;
         }
+
+        [HttpGet]
+        public IActionResult GetDesks()
+        {
+            return Ok(_deskService.GetDesks());
+        }
+
     }
 }
 

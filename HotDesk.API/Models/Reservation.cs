@@ -8,15 +8,15 @@ namespace HotDesk.API.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        private int Id { get; set; }
+        public int Id { get; set; }
 
-        private string Name { get; set; }
+        public string Name { get; set; }
 
-        private DateTime startDate { get; set; }
+        public DateTime startDate { get; set; }
 
-        private DateTime endDate { get; set; }
+        public DateTime endDate { get; set; }
 
-        private int deskId { get; set; }
+        public int deskId { get; set; }
     }
 }
 
