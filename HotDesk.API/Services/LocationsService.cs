@@ -15,9 +15,12 @@ namespace HotDesk.API.Services
         }
 
 
-        public async Task<IEnumerable<Location>> SelectLocations() => await _locations.Find(_ => true).ToListAsync();
+        public async Task<IEnumerable<Location>> SelectLocationsAsync() =>
+            await _locations.Find(_ => true).ToListAsync();
 
-        public async Task InsertLocation(Location location) => await _locations.InsertOneAsync(location);
+
+        public async Task InsertLocationAsync(Location location) =>
+            await _locations.InsertOneAsync(location);
 
     }
 }

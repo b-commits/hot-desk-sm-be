@@ -8,9 +8,10 @@ namespace HotDesk.API.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
-        public int LocationId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string LocationId { get; set; }
 
     }
 }

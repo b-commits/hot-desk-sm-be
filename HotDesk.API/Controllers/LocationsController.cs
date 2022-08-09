@@ -17,16 +17,17 @@ public class LocationsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetLocations()
+    public async Task<ActionResult<Location>> GetLocations()
     {
-        return Ok(_locationService.SelectLocations());
+        var locations = await _locationService.SelectLocationsAsync();
+        return Ok(locations);
     }
 
     [HttpPost]
-    public IActionResult PostLocation(Location location)
+    public async Task<IActionResult> PostLocation(Location location)
     {
-        _locationService.InsertLocation(location);
-        return Ok();
+        await _locationService.InsertLocationAsync(location);
+        return CreatedAtAction(nameof(GetLocations), new { id = location.Id }, location);
     }
 
 

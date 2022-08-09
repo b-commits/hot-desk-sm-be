@@ -17,6 +17,8 @@ namespace HotDesk.API.Services
         public async Task<IEnumerable<Desk>> GetDesks() =>
           await _desks.Find(_ => true).ToListAsync();
 
+        public async Task InsertDeskAsync(Desk desk) =>
+            await _desks.InsertOneAsync(desk);
     }
 
 }

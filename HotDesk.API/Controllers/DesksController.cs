@@ -1,4 +1,5 @@
 ﻿using System;
+using HotDesk.API.Models;
 using HotDesk.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,13 @@ namespace HotDesk.API.Controllers
         public IActionResult GetDesks()
         {
             return Ok(_deskService.GetDesks());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostDesk(Desk desk)
+        {
+            await _deskService.InsertDeskAsync(desk);
+            return CreatedAtAction(nameof(GetDesks), new { id = desk.Id }, desk);
         }
 
     }

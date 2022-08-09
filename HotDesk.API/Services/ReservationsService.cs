@@ -15,7 +15,10 @@ namespace HotDesk.API.Services
         }
 
         public async Task<IEnumerable<Reservation>> GetReservations() =>
-      await _reservations.Find(_ => true).ToListAsync();
+                await _reservations.Find(_ => true).ToListAsync();
+
+        public async Task InsertReservationAsync(Reservation reservation) =>
+                await _reservations.InsertOneAsync(reservation);
     }
 }
 
