@@ -36,13 +36,19 @@ namespace HotDesk.API.Controllers
 
             var reservations = await _reservationService.GetReservationsAsync();
 
-            var overlaps = reservations.Where(existingReservation => ValidationUtils.CheckDateOverlaps
-                (existingReservation.StartDate, existingReservation.EndDate,
-                reservation.StartDate, reservation.EndDate));
-
-            if (overlaps is not null)
+            try
             {
-                return Conflict();
+                var overlaps = reservations.Where(existingReservation => ValidationUtils.CheckDateOverlaps
+                    (existingReservation.StartDate, existingReservation.EndDate,
+                    reservation.StartDate, reservation.EndDate)).ToList();
+                if (overlaps.Any())
+                {
+                    return Conflict("The desk is reserved for the provided timeframe");
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                return Conflict(ex.Message);
             }
 
             if (

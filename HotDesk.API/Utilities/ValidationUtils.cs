@@ -18,12 +18,12 @@
                                       DateTime newDateStart, DateTime newDateEnd)
         {
             if (existingDateEnd > existingDateStart)
-                throw new ArgumentException("A start can not be after its end.");
+                throw new ArgumentException("Interal error");
 
             if (newDateStart > newDateEnd)
-                throw new ArgumentException("B start can not be after its end.");
+                throw new ArgumentException("Date start can not be after its end.");
 
-            return ((newDateStart > existingDateStart && newDateEnd > existingDateEnd) ||
+            return (!(newDateStart > existingDateStart && newDateEnd > existingDateEnd) ||
                 (newDateStart < existingDateStart && newDateEnd < existingDateEnd)
                 );
         }
