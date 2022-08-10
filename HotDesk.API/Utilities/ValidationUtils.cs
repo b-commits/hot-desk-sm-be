@@ -11,5 +11,22 @@
             "Cannot delete a Desk if it is under Reservation.";
         public static readonly string CANNOT_DELETE_LOCATION =
             "Cannot delete a Location if it holds some Desks";
+        public static readonly string DESK_DOES_NOT_EXIST =
+            "A Desk with a provided ID does not exist";
+
+        public static bool CheckDateOverlaps(DateTime existingDateStart, DateTime existingDateEnd,
+                                      DateTime newDateStart, DateTime newDateEnd)
+        {
+            if (existingDateEnd > existingDateStart)
+                throw new ArgumentException("A start can not be after its end.");
+
+            if (newDateStart > newDateEnd)
+                throw new ArgumentException("B start can not be after its end.");
+
+            return ((newDateStart > existingDateStart && newDateEnd > existingDateEnd) ||
+                (newDateStart < existingDateStart && newDateEnd < existingDateEnd)
+                );
+        }
+
     }
 }

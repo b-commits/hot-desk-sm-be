@@ -10,21 +10,41 @@ namespace HotDesk.API.Controllers
     public class ReservationsController : ControllerBase
     {
         private readonly IReservationService _reservationService;
+        private readonly IDeskService _deskService;
 
-        public ReservationsController(IReservationService reservationService)
+        public ReservationsController(IReservationService reservationService, IDeskService deskService)
         {
             _reservationService = reservationService;
+            _deskService = deskService;
         }
 
         [HttpGet]
-        public IActionResult GetReservations()
+        public async Task<ActionResult<Reservation>> GetReservations()
         {
-            return Ok(_reservationService.GetReservationsAsync());
+            return Ok(await _reservationService.GetReservationsAsync());
         }
 
         [HttpPost]
         public async Task<IActionResult> PostReserivation(Reservation reservation)
         {
+            var desk = await _deskService.GetDeskByIdAsync(reservation.DeskId);
+
+            if (desk is null)
+            {
+                return NotFound(ValidationUtils.DESK_DOES_NOT_EXIST);
+            }
+
+            var reservations = await _reservationService.GetReservationsAsync();
+
+            var overlaps = reservations.Where(existingReservation => ValidationUtils.CheckDateOverlaps
+                (existingReservation.StartDate, existingReservation.EndDate,
+                reservation.StartDate, reservation.EndDate));
+
+            if (overlaps is not null)
+            {
+                return Conflict();
+            }
+
             if (
                 (reservation.EndDate - reservation.StartDate).TotalDays
                 > ValidationUtils.MAX_RESERVATION_LENGTH

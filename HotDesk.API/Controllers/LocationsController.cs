@@ -21,8 +21,7 @@ public class LocationsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<Location>> GetLocations()
     {
-        var locations = await _locationService.GetLocationsAsync();
-        return Ok(locations);
+        return Ok(await _locationService.GetLocationsAsync());
     }
 
     [HttpGet("{id:length(24)}")]
