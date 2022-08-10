@@ -1,4 +1,5 @@
-﻿using HotDesk.API.Models;
+﻿using System.Web.Http.Cors;
+using HotDesk.API.Models;
 using HotDesk.API.Services;
 using HotDesk.API.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HotDesk.API.Controllers;
 
 [ApiController]
+[EnableCors(origins: "*", headers: "*", methods: "*")]
 [Route("/locations")]
 public class LocationsController : ControllerBase
 {

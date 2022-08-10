@@ -11,6 +11,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="MongoDB.Driver" Version="2.17.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
     <None Remove="Services\ReservationsService\" />
     <None Remove="Services\LocationsService\" />
     <None Remove="Utilities\" />
+    <None Remove="Microsoft.AspNet.WebApi.Cors" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

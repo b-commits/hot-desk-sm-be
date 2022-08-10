@@ -2,10 +2,12 @@
 using HotDesk.API.Utilities;
 using HotDesk.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Cors;
 
 namespace HotDesk.API.Controllers
 {
     [ApiController]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Route("/reservations")]
     public class ReservationsController : ControllerBase
     {
