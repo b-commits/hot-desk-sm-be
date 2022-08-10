@@ -22,7 +22,6 @@
     <None Remove="Services\ReservationsService\" />
     <None Remove="Services\LocationsService\" />
     <None Remove="Utilities\" />
-    <None Remove="Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -32,6 +31,5 @@
     <Folder Include="Services\ReservationsService\" />
     <Folder Include="Services\LocationsService\" />
     <Folder Include="Utilities\" />
-    <Folder Include="Tests\" />
   </ItemGroup>
 </Project>
