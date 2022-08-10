@@ -12,7 +12,10 @@ namespace HotDesk.API.Controllers
         private readonly IReservationService _reservationService;
         private readonly IDeskService _deskService;
 
-        public ReservationsController(IReservationService reservationService, IDeskService deskService)
+        public ReservationsController(
+            IReservationService reservationService,
+            IDeskService deskService
+        )
         {
             _reservationService = reservationService;
             _deskService = deskService;
@@ -38,9 +41,17 @@ namespace HotDesk.API.Controllers
 
             try
             {
-                var overlaps = reservations.Where(existingReservation => ValidationUtils.CheckDateOverlaps
-                    (existingReservation.StartDate, existingReservation.EndDate,
-                    reservation.StartDate, reservation.EndDate)).ToList();
+                var overlaps = reservations
+                    .Where(
+                        existingReservation =>
+                            ValidationUtils.CheckDateOverlaps(
+                                existingReservation.StartDate,
+                                existingReservation.EndDate,
+                                reservation.StartDate,
+                                reservation.EndDate
+                            )
+                    )
+                    .ToList();
                 if (overlaps.Any())
                 {
                     return Conflict("The desk is reserved for the provided timeframe");

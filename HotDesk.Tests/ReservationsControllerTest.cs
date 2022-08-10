@@ -11,15 +11,17 @@ using Xunit;
 public class ReservationsControllerTest
 {
     private readonly ReservationsController _reservationsController;
-    private readonly Mock<IReservationService> _mockReservationService = new Mock<IReservationService>();
+    private readonly Mock<IReservationService> _mockReservationService =
+        new Mock<IReservationService>();
     private readonly Mock<IDeskService> _mockDeskService = new Mock<IDeskService>();
-
 
     public ReservationsControllerTest()
     {
-        _reservationsController = new ReservationsController(_mockReservationService.Object, _mockDeskService.Object);
+        _reservationsController = new ReservationsController(
+            _mockReservationService.Object,
+            _mockDeskService.Object
+        );
     }
-
 
     [Fact]
     public async Task GetReservations_On_Success_Returns_200_With_Users()
@@ -35,30 +37,20 @@ public class ReservationsControllerTest
         // Assert
         Assert.Equal(200, result.StatusCode);
         Assert.IsType<List<Reservation>>(result.Value);
-
     }
-
-
-    [Fact]
-    public void PostReservations_With_Overlapping_Dates_Returns_409()
-    {
-
-    }
-
 
     [Fact]
     public async Task GetReservationById_If_Not_Found_Returns_404()
     {
+        // Arrange
         _mockReservationService
-            .Setup(service => service.GetReservationByIdAsync("2934")).ReturnsAsync((Reservation)null);
+            .Setup(service => service.GetReservationByIdAsync("2934"))
+            .ReturnsAsync((Reservation)null);
 
-
+        // Act
         var result = (NotFoundResult)await _reservationsController.GetReservationById("2934");
 
-
+        // Assert
         Assert.Equal(404, result.StatusCode);
-
-
     }
-
 }

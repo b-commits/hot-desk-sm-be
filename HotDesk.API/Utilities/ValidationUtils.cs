@@ -14,8 +14,12 @@
         public static readonly string DESK_DOES_NOT_EXIST =
             "A Desk with a provided ID does not exist";
 
-        public static bool CheckDateOverlaps(DateTime existingDateStart, DateTime existingDateEnd,
-                                      DateTime newDateStart, DateTime newDateEnd)
+        public static bool CheckDateOverlaps(
+            DateTime existingDateStart,
+            DateTime existingDateEnd,
+            DateTime newDateStart,
+            DateTime newDateEnd
+        )
         {
             if (existingDateEnd > existingDateStart)
                 throw new ArgumentException("Interal error");
@@ -23,10 +27,10 @@
             if (newDateStart > newDateEnd)
                 throw new ArgumentException("Date start can not be after its end.");
 
-            return (!(newDateStart > existingDateStart && newDateEnd > existingDateEnd) ||
-                (newDateStart < existingDateStart && newDateEnd < existingDateEnd)
-                );
+            return (
+                !(newDateStart > existingDateStart && newDateEnd > existingDateEnd)
+                || (newDateStart < existingDateStart && newDateEnd < existingDateEnd)
+            );
         }
-
     }
 }
