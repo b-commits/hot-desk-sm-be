@@ -2,7 +2,7 @@
 
 # Specs
 
-In order to run the project, please clone the repo onto your local machine, navigate to the project's root directory and run the following commands:
+In order to run the project, please clone the repo onto your local machine, navigate to the project's root directory, install the dependencies and run the following commands:
 
     `dotnet run`
 
