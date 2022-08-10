@@ -14,3 +14,12 @@ Alternatively, you can visit the following URL and try out the live demo yoursel
 | Dotnet           | v6.0.4                                          |
 | Front-end (work in progress)       | [https://github.com/b-commits/hot-desk-sm-fe](https://github.com/b-commits/hot-desk-sm-fe) |
 | Swagger Doc      | [https://hotdesk-api.azurewebsites.net/swagger/index.html](https://hotdesk-api.azurewebsites.net/swagger/index.html) |
+
+
+|                  | Example endpoints                                     |
+| ---------------- | ----------------------------------------------- |
+| /locations           | Gets locations (i.e. cities) where hot-desks are located. |     |
+| /desks     | Gets a list of desks. |
+| /reservations     | Gets a list of desk reservations  |
+| Detailed endpoint descriptions is available in the swagger doc above |
+
