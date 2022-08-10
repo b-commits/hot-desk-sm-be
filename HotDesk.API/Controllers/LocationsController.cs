@@ -19,13 +19,13 @@ public class LocationsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<Location>> GetLocations()
+    public async Task<IActionResult> GetLocations()
     {
         return Ok(await _locationService.GetLocationsAsync());
     }
 
     [HttpGet("{id:length(24)}")]
-    public async Task<ActionResult<Location>> GetLocationById(string id)
+    public async Task<IActionResult> GetLocationById(string id)
     {
         var location = await _locationService.GetLocationBydIdAsync(id);
 

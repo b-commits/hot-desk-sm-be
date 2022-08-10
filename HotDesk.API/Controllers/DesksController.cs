@@ -19,13 +19,13 @@ namespace HotDesk.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Desk>> GetDesks()
+        public async Task<IActionResult> GetDesks()
         {
             return Ok(await _deskService.GetDesksAsync());
         }
 
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Desk>> GetById(string id)
+        public async Task<IActionResult> GetById(string id)
         {
             var desk = await _deskService.GetDeskByIdAsync(id);
 

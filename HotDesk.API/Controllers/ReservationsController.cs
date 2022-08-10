@@ -19,7 +19,7 @@ namespace HotDesk.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Reservation>> GetReservations()
+        public async Task<IActionResult> GetReservations()
         {
             return Ok(await _reservationService.GetReservationsAsync());
         }
@@ -68,7 +68,7 @@ namespace HotDesk.API.Controllers
         }
 
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Reservation>> GetReservationById(string id)
+        public async Task<IActionResult> GetReservationById(string id)
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
 
