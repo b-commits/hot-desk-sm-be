@@ -1,4 +1,5 @@
 # hot-desk-sm-be
+Please note that initial loadtimes can be higher; the app is hosted on Azure's free tier VPS.
 
 # Specs
 
