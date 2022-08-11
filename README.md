@@ -14,3 +14,4 @@ Alternatively, you can visit the following URL and try out the live demo yoursel
 | Dotnet           | v6.0.4                                          |
 | Front-end (work in progress)       | [https://github.com/b-commits/hot-desk-sm-fe](https://github.com/b-commits/hot-desk-sm-fe) |
 | Swagger Doc      | [https://hotdesk-api.azurewebsites.net/swagger/index.html](https://hotdesk-api.azurewebsites.net/swagger/index.html) |
+| Example endpoint | [https://hotdesk-api.azurewebsites.net/swagger/index.html](https://hotdesk-api.azurewebsites.net/swagger/index.html)
