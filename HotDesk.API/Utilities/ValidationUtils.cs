@@ -21,10 +21,10 @@
             DateTime newDateEnd
         )
         {
-            if (existingDateEnd > existingDateStart)
+            if (existingDateEnd < existingDateStart)
                 throw new ArgumentException("Interal error");
 
-            if (newDateStart > newDateEnd)
+            if (newDateEnd < newDateStart)
                 throw new ArgumentException("Date start can not be after its end.");
 
             return (
