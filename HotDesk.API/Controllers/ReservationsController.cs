@@ -46,7 +46,7 @@ namespace HotDesk.API.Controllers
                 var overlaps = reservations
                     .Where(
                         existingReservation =>
-                            ValidationUtils.CheckDateOverlaps(
+                            ValidationUtils.doesDateOverlap(
                                 existingReservation.StartDate,
                                 existingReservation.EndDate,
                                 reservation.StartDate,
