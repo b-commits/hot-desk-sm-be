@@ -39,11 +39,14 @@ namespace HotDesk.API.Controllers
                 return NotFound(ValidationUtils.DESK_DOES_NOT_EXIST);
             }
 
-            var reservations = await _reservationService.GetReservationsAsync();
+            var deskReservations = await _reservationService.GetReservationsAsync();
+
+            deskReservations = deskReservations.Where(deskReservation =>
+                    deskReservation.DeskId == reservation.DeskId);
 
             try
             {
-                var overlaps = reservations
+                var overlaps = deskReservations
                     .Where(
                         existingReservation =>
                             ValidationUtils.doesDateOverlap(
