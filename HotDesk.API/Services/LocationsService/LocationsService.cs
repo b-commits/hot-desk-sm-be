@@ -2,30 +2,29 @@
 using HotDesk.API.Models;
 using MongoDB.Driver;
 
-namespace HotDesk.API.Services
+namespace HotDesk.API.Services;
+
+public class LocationsService : ILocationService
 {
-    public class LocationsService : ILocationService
+    private readonly IMongoCollection<Location> _locations;
+
+    public LocationsService(IDatabaseContext database)
     {
-        private readonly IMongoCollection<Location> _locations;
-
-        public LocationsService(IDatabaseContext database)
-        {
-            _locations = database.GetLocationsCollection();
-        }
-
-        public async Task<IEnumerable<Location>> GetLocationsAsync() =>
-            await _locations.Find(_ => true).ToListAsync();
-
-        public async Task InsertLocationAsync(Location location) =>
-            await _locations.InsertOneAsync(location);
-
-        public async Task DeleteLocationAsync(string locationId) =>
-            await _locations.DeleteOneAsync(location => location.Id == locationId);
-
-        public async Task<Location?> GetLocationBydIdAsync(string locationId) =>
-            await _locations.Find(location => location.Id == locationId).FirstOrDefaultAsync();
-
-        public async Task UpdateLocationAsync(string locationId, Location newLocation) =>
-            await _locations.ReplaceOneAsync(location => location.Id == locationId, newLocation);
+        _locations = database.GetLocationsCollection();
     }
+
+    public async Task<IEnumerable<Location>> GetLocationsAsync() =>
+        await _locations.Find(_ => true).ToListAsync();
+
+    public async Task InsertLocationAsync(Location location) =>
+        await _locations.InsertOneAsync(location);
+
+    public async Task DeleteLocationAsync(string locationId) =>
+        await _locations.DeleteOneAsync(location => location.Id == locationId);
+
+    public async Task<Location?> GetLocationBydIdAsync(string locationId) =>
+        await _locations.Find(location => location.Id == locationId).FirstOrDefaultAsync();
+
+    public async Task UpdateLocationAsync(string locationId, Location newLocation) =>
+        await _locations.ReplaceOneAsync(location => location.Id == locationId, newLocation);
 }

@@ -4,85 +4,84 @@ using HotDesk.API.Services;
 using HotDesk.API.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HotDesk.API.Controllers
+namespace HotDesk.API.Controllers;
+
+[ApiController]
+[EnableCors(origins: "*", headers: "*", methods: "*")]
+[Route("/desks")]
+public class DesksController : ControllerBase
 {
-    [ApiController]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [Route("/desks")]
-    public class DesksController : ControllerBase
+    private readonly IDeskService _deskService;
+    private readonly IReservationService _reservationService;
+
+    public DesksController(IDeskService deskService, IReservationService reservationService)
     {
-        private readonly IDeskService _deskService;
-        private readonly IReservationService _reservationService;
+        _deskService = deskService;
+        _reservationService = reservationService;
+    }
 
-        public DesksController(IDeskService deskService, IReservationService reservationService)
+    [HttpGet]
+    public async Task<IActionResult> GetDesks()
+    {
+        return Ok(await _deskService.GetDesksAsync());
+    }
+
+    [HttpGet("{id:length(24)}")]
+    public async Task<IActionResult> GetById(string id)
+    {
+        var desk = await _deskService.GetDeskByIdAsync(id);
+
+        if (desk is null)
         {
-            _deskService = deskService;
-            _reservationService = reservationService;
+            return NotFound();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetDesks()
+        return Ok(desk);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PostDesk(Desk desk)
+    {
+        await _deskService.InsertDeskAsync(desk);
+        return CreatedAtAction(nameof(GetDesks), new { id = desk.Id }, desk);
+    }
+
+    [HttpDelete("{id:length(24)}")]
+    public async Task<IActionResult> DeleteDesk(string id)
+    {
+        var desk = await _deskService.GetDeskByIdAsync(id);
+
+        if (desk is null)
         {
-            return Ok(await _deskService.GetDesksAsync());
+            return NotFound();
         }
 
-        [HttpGet("{id:length(24)}")]
-        public async Task<IActionResult> GetById(string id)
+        var deskReservations = await _reservationService.GetReservationsAsync();
+
+        if (deskReservations.Any(reservation => reservation.DeskId == id))
         {
-            var desk = await _deskService.GetDeskByIdAsync(id);
-
-            if (desk is null)
-            {
-                return NotFound();
-            }
-
-            return Ok(desk);
+            return BadRequest(ValidationUtils.CANNOT_DELETE_DESK);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostDesk(Desk desk)
+        await _deskService.DeleteDeskAsync(id);
+
+        return Ok();
+    }
+
+    [HttpPut("{id:length(24)}")]
+    public async Task<IActionResult> UpdateDesk(string id, Desk newDesk)
+    {
+        var desk = await _deskService.GetDeskByIdAsync(id);
+
+        if (desk is null)
         {
-            await _deskService.InsertDeskAsync(desk);
-            return CreatedAtAction(nameof(GetDesks), new { id = desk.Id }, desk);
+            return NotFound();
         }
 
-        [HttpDelete("{id:length(24)}")]
-        public async Task<IActionResult> DeleteDesk(string id)
-        {
-            var desk = await _deskService.GetDeskByIdAsync(id);
+        newDesk.Id = desk.Id;
 
-            if (desk is null)
-            {
-                return NotFound();
-            }
+        await _deskService.UpdateDeskAsync(id, newDesk);
 
-            var deskReservations = await _reservationService.GetReservationsAsync();
-
-            if (deskReservations.Any(reservation => reservation.DeskId == id))
-            {
-                return BadRequest(ValidationUtils.CANNOT_DELETE_DESK);
-            }
-
-            await _deskService.DeleteDeskAsync(id);
-
-            return Ok();
-        }
-
-        [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> UpdateDesk(string id, Desk newDesk)
-        {
-            var desk = await _deskService.GetDeskByIdAsync(id);
-
-            if (desk is null)
-            {
-                return NotFound();
-            }
-
-            newDesk.Id = desk.Id;
-
-            await _deskService.UpdateDeskAsync(id, newDesk);
-
-            return Ok();
-        }
+        return Ok();
     }
 }
