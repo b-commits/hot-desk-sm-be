@@ -1,14 +1,15 @@
-﻿using HotDesk.API.Models;
-using HotDesk.API.Utilities;
+﻿using HotDesk.API.Utilities;
 using HotDesk.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Cors;
+using HotDesk.API.Entities;
+using HotDesk.API.Services.ReservationsService;
 
 namespace HotDesk.API.Controllers;
 
 [ApiController]
 [EnableCors(origins: "*", headers: "*", methods: "*")]
-[Route("/reservations")]
+[Route("[controller]")]
 public class ReservationsController : ControllerBase
 {
     private readonly IReservationService _reservationService;
@@ -30,7 +31,7 @@ public class ReservationsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostReserivation(Reservation reservation)
+    public async Task<IActionResult> PostReservation(Reservation reservation)
     {
         var desk = await _deskService.GetDeskByIdAsync(reservation.DeskId);
 

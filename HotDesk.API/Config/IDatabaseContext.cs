@@ -1,4 +1,4 @@
-﻿using HotDesk.API.Models;
+﻿using HotDesk.API.Entities;
 using MongoDB.Driver;
 
 namespace HotDesk.API.Config;

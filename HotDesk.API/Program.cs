@@ -1,5 +1,8 @@
 ﻿using HotDesk.API.Config;
 using HotDesk.API.Services;
+using HotDesk.API.Services.DesksService;
+using HotDesk.API.Services.LocationsService;
+using HotDesk.API.Services.ReservationsService;
 
 var builder = WebApplication.CreateBuilder(args);
 

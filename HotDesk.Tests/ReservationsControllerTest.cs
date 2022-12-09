@@ -1,8 +1,10 @@
-﻿namespace HotDesk.Tests;
+﻿using HotDesk.API.Entities;
+using HotDesk.API.Services.ReservationsService;
+
+namespace HotDesk.Tests;
 
 using System.Threading.Tasks;
 using HotDesk.API.Controllers;
-using HotDesk.API.Models;
 using HotDesk.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

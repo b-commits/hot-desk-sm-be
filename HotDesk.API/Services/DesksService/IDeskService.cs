@@ -1,4 +1,4 @@
-﻿using HotDesk.API.Models;
+﻿using HotDesk.API.Entities;
 
 namespace HotDesk.API.Services;
 

@@ -1,14 +1,13 @@
-﻿using System.Web.Http.Cors;
-using HotDesk.API.Models;
+﻿using HotDesk.API.Entities;
 using HotDesk.API.Services;
+using HotDesk.API.Services.ReservationsService;
 using HotDesk.API.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotDesk.API.Controllers;
 
 [ApiController]
-[EnableCors(origins: "*", headers: "*", methods: "*")]
-[Route("/desks")]
+[Route("[controller]")]
 public class DesksController : ControllerBase
 {
     private readonly IDeskService _deskService;
@@ -21,10 +20,8 @@ public class DesksController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetDesks()
-    {
-        return Ok(await _deskService.GetDesksAsync());
-    }
+    public async Task<IActionResult> GetDesks() => Ok(await _deskService.GetDesksAsync());
+    
 
     [HttpGet("{id:length(24)}")]
     public async Task<IActionResult> GetById(string id)

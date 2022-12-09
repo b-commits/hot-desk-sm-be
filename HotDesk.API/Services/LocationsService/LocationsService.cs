@@ -1,8 +1,8 @@
 ﻿using HotDesk.API.Config;
-using HotDesk.API.Models;
+using HotDesk.API.Entities;
 using MongoDB.Driver;
 
-namespace HotDesk.API.Services;
+namespace HotDesk.API.Services.LocationsService;
 
 public class LocationsService : ILocationService
 {

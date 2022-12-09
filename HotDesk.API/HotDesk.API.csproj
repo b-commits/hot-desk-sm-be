@@ -26,7 +26,6 @@
     <None Remove="Microsoft.AspNet.WebApi.Cors" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Config\" />
     <Folder Include="Services\DesksService\" />
